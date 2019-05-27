@@ -1,5 +1,5 @@
 const greeter = (person: string) => {
-  return "Hello, " + person;
+  console.log("Hello, " + person);
 };
 
-export default greeter;
+export default {greeter};

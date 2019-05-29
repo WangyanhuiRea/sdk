@@ -31,24 +31,20 @@ const service: axios.AxiosInstance = Axios.create({
   withCredentials: true, //解决axios不带cookie
   method: "GET",
   data: {}
+  // `baseURL` 将自动加在 `url` 前面，除非 `url` 是一个绝对 URL
+  // TBD
+  //  baseURL : ServeAddress + APIBasePath;
 });
 
 service.interceptors.request.use(
   config => {
-    console.log("request");
-
-    console.log(config);
-
     config.data = JSON.stringify(config.data);
-    config.headers = {
-      "Content-Type": "application/x-www-form-urlencoded"
-    };
     // ------------------------------------------------------------------------------------
-    // removePending(config); //在一个ajax发送前执行一下取消操作
-    // config.cancelToken = new cancelToken(c => {
-    //   // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
-    //   pending.push({ tag: config.url + "&" + config.method, canceler: c });
-    // });
+    removePending(config); //在一个ajax发送前执行一下取消操作
+    config.cancelToken = new cancelToken(c => {
+      // 这里的ajax标识用请求地址&请求方式拼接的字符串
+      pending.push({ tag: config.url + "&" + config.method, canceler: c });
+    });
     // -----------------------------------------------------------------------------------------
     return config;
   },

@@ -1,4 +1,4 @@
-import sdk from "../dist/index";
+import sdk from "../dist";
 
 let { connector } = sdk;
 

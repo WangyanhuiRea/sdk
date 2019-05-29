@@ -1,5 +1,3 @@
-const greeter = (person: string) => {
-  console.log("Hello, " + person);
-};
+import api from "./api";
 
-export default {greeter};
+export default { ...api };
